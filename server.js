@@ -174,12 +174,12 @@ app.delete("/api/admin/messages/:id", verifyAdmin, async (req, res) => {
 });
 
 // ================= BACKEND TEST =================
-const PORT = process.env.PORT || 3000;
-
-app.listen(PORT, "0.0.0.0", () => {
-    console.log("Bihar Tourism Server is running on port:", PORT);
+app.get("/api/test", (req, res) => {
+    res.json({
+        success: true,
+        message: "Bihar Tourism Backend Connected Successfully!"
+    });
 });
-
 // ================= CONTACT FORM =================
 
 app.post("/api/contact", async (req, res) => {
