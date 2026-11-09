@@ -1,10 +1,11 @@
+
 {
   "name": "bihar-torism",
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
   "scripts": {
-    "start": "node server.js"
+    "start": "node server.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "keywords": [],
@@ -20,3 +21,6 @@
     "mysql2": "^3.24.6"
   }
 }
+
+ 
+ 
