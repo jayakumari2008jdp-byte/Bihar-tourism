@@ -3,26 +3,28 @@ require("dotenv").config({
     path: require("path").join(__dirname, ".env")
 });
 
-
 const express = require("express");
-const mysql = require("mysql2/promise");
+const { Pool } = require("pg");
 const cors = require("cors");
 const bcrypt = require("bcryptjs");
 const jwt = require("jsonwebtoken");
-
 
 const app = express();
 
 app.use(cors());
 app.use(express.json());
 
-const db = mysql.createPool({
+// ================= SUPABASE DATABASE =================
+
+const db = new Pool({
     host: process.env.DB_HOST,
     user: process.env.DB_USER,
     password: process.env.DB_PASSWORD,
     database: process.env.DB_NAME,
-    port: Number(process.env.DB_PORT) || 3306
-
+    port: Number(process.env.DB_PORT) || 5432,
+    ssl: {
+        rejectUnauthorized: false
+    }
 });
 
 // ================= ADMIN LOGIN =================
@@ -58,7 +60,7 @@ app.post("/api/admin/login", async (req, res) => {
         }
 
         const token = jwt.sign(
-            { username: username },
+            { username },
             process.env.JWT_SECRET,
             { expiresIn: "2h" }
         );
@@ -66,12 +68,11 @@ app.post("/api/admin/login", async (req, res) => {
         res.json({
             success: true,
             message: "Admin login successful",
-            token: token
+            token
         });
 
     } catch (error) {
         console.error("Admin Login Error:", error);
-
         res.status(500).json({
             success: false,
             message: "Server error"
@@ -91,9 +92,8 @@ function verifyAdmin(req, res, next) {
         });
     }
 
-    const token = authHeader.split(" ")[1];
-
     try {
+        const token = authHeader.split(" ")[1];
         req.admin = jwt.verify(token, process.env.JWT_SECRET);
         next();
     } catch (error) {
@@ -108,17 +108,17 @@ function verifyAdmin(req, res, next) {
 
 app.get("/api/admin/messages", verifyAdmin, async (req, res) => {
     try {
-        const [messages] = await db.query(
+        const result = await db.query(
             "SELECT * FROM contacts ORDER BY id DESC"
         );
 
         res.json({
             success: true,
-            messages: messages
+            messages: result.rows
         });
 
     } catch (error) {
-        console.error(error);
+        console.error("Load Messages Error:", error);
         res.status(500).json({
             success: false,
             message: "Unable to load messages"
@@ -139,12 +139,12 @@ app.delete("/api/admin/messages/:id", verifyAdmin, async (req, res) => {
             });
         }
 
-        const [result] = await db.execute(
-            "DELETE FROM contacts WHERE id = ?",
+        const result = await db.query(
+            "DELETE FROM contacts WHERE id = $1",
             [id]
         );
 
-        if (result.affectedRows === 0) {
+        if (result.rowCount === 0) {
             return res.status(404).json({
                 success: false,
                 message: "Message not found"
@@ -158,7 +158,6 @@ app.delete("/api/admin/messages/:id", verifyAdmin, async (req, res) => {
 
     } catch (error) {
         console.error("Delete Message Error:", error);
-
         res.status(500).json({
             success: false,
             message: "Unable to delete message"
@@ -166,12 +165,14 @@ app.delete("/api/admin/messages/:id", verifyAdmin, async (req, res) => {
     }
 });
 
-// Backend test
+// ================= BACKEND TEST =================
+
 app.get("/", (req, res) => {
     res.send("Bihar Tourism Backend is Running!");
 });
 
-// Contact form data save
+// ================= CONTACT FORM =================
+
 app.post("/api/contact", async (req, res) => {
     try {
         const { name, email, subject, message } = req.body;
@@ -183,20 +184,19 @@ app.post("/api/contact", async (req, res) => {
             });
         }
 
-        const sql = `
-            INSERT INTO contacts
-            (name, email, subject, message)
-            VALUES (?, ?, ?, ?)
-        `;
+        const result = await db.query(
+            `INSERT INTO contacts (name, email, subject, message)
+             VALUES ($1, $2, $3, $4)
+             RETURNING id`,
+            [
+                name.trim(),
+                email.trim(),
+                subject.trim(),
+                message.trim()
+            ]
+        );
 
-        const [result] = await db.execute(sql, [
-            name.trim(),
-            email.trim(),
-            subject.trim(),
-            message.trim()
-        ]);
-
-        console.log("Contact saved. Insert ID:", result.insertId);
+        console.log("Contact saved. Insert ID:", result.rows[0].id);
 
         res.status(201).json({
             success: true,
@@ -205,7 +205,6 @@ app.post("/api/contact", async (req, res) => {
 
     } catch (error) {
         console.error("Contact Save Error:", error);
-
         res.status(500).json({
             success: false,
             message: "Server error. Please try again."
@@ -213,19 +212,21 @@ app.post("/api/contact", async (req, res) => {
     }
 });
 
-// Start server
+// ================= START SERVER =================
+
 async function startServer() {
     try {
         await db.query("SELECT 1");
 
-        console.log("MySQL Connected Successfully!");
+        console.log("Supabase PostgreSQL Connected Successfully!");
 
         app.listen(process.env.PORT || 3000, () => {
-            console.log("Server running at http://localhost:3000");
+            console.log("Bihar Tourism Server is running");
         });
 
     } catch (error) {
-        console.log("MySQL Connection Failed:", error.message);
+        console.error("Database Connection Failed:", error.message);
+        process.exit(1);
     }
 }
 
