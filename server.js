@@ -10,6 +10,14 @@ const bcrypt = require("bcryptjs");
 const jwt = require("jsonwebtoken");
 
 const app = express();
+const path = require("path");
+
+// Bihar Tourism website files serve karega
+app.use(express.static(__dirname));
+
+app.get("/", (req, res) => {
+    res.sendFile(path.join(__dirname, "index.html"));
+});
 
 app.use(cors());
 app.use(express.json());
