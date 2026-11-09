@@ -1,0 +1,474 @@
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body{
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+}
+/* Header */
+.header {
+    width:100%;
+    background-color: rgb(32, 121, 113);
+    color: white;
+    height: 70px;
+    display:flex;
+    align-items: center;
+    justify-content: space-between;
+
+    padding: 12px 50px;
+}
+
+/* Logo + Name*/
+.logo-section {
+    display:flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.logo-section img  {
+    width: 55px;
+    height: 55px;
+    object-fit: contain;
+
+}  
+
+/*Navigation*/
+.navbar {
+    display: flex;
+    gap: 25px;
+}
+
+.navbar a  {
+    color: white;
+    text-decoration: none;
+    font-size: 17px;
+    font-weight: bold;
+
+}
+
+.navbar a:hover  {
+     color: rgb(195, 228, 228);
+}
+
+/*mobile*/
+@media (max-width:768px) {
+
+    .header {
+        flex-direction: column;
+        gap: 15px;
+    }
+
+.navbar {
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 15px;
+
+}
+}
+/* Background Slideshow section */
+.hero {
+    width: 100%;
+    min-height: 92vh;
+    background-image: url("bihar1.jpg");
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    position: relative;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+}
+
+    /* Hero Text */
+.hero-content {
+    text-align: center;
+    color: black;
+    
+    padding: 40px;
+    border-radius: 10px;
+    width: 70%;
+}
+.hero-content h1{
+    font-size: 100px;
+    color: white;
+
+}
+.hero-content p{
+    font-size: 50px;
+    color: white;
+}
+/* About Bihar section */
+#about {
+    background-color: aliceblue;
+    padding: 60px 10% ;
+    text-align: center;
+    min-height: 200px;
+}
+#about h2 {
+    font-size: 50px;
+    color:rgb(255, 0, 0);
+    margin-bottom: 25px;
+}
+#about p {
+    max-width: 850px;
+    margin: auto;
+    font-size: 20px;
+    line-height: 1.9;
+    color:black;
+    text-align: center;
+}
+/* Destination Section */
+
+.destination-section {
+    padding: 70px 7%;
+    background: #f6f3ff;
+    text-align: center;
+}
+
+.destination-section h2 {
+    font-size: 36px;
+    color: #087f5b;
+    margin-bottom: 15px;
+}
+
+.destination-intro {
+    font-size: 16px;
+    color: #555;
+    margin-bottom: 40px;
+    line-height: 1.7;
+}
+
+.destination-container {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 25px;
+}
+
+.destination-card {
+    background: white;
+    border-radius: 12px;
+    overflow: hidden;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.12);
+    transition: transform 0.3s;
+    text-align: left;
+    padding: 20px;
+    margin: 15px;
+}
+.location-btn {
+    display: inline-block;
+    background: #176b3a;
+    color: white;
+    padding: 10px 16px;
+    text-decoration: none;
+    border-radius: 6px;
+    margin-top: 10px;
+}
+
+.location-btn:hover {
+    background: #0d4927;
+}
+
+.destination-card:hover {
+    transform: translateY(-8px);
+}
+
+.destination-card img {
+    width: 100%;
+    height: 220px;
+    object-fit: cover;
+    display: block;
+}
+
+.destination-info {
+    padding: 20px;
+}
+
+.destination-info h3 {
+    font-size: 22px;
+    color: #087f5b;
+    margin-bottom: 12px;
+}
+
+.destination-info p {
+    font-size: 15px;
+    color: #555;
+    line-height: 1.7;
+    margin-bottom: 20px;
+}
+
+.destination-info a {
+    display: inline-block;
+    padding: 10px 18px;
+    background: #087f5b;
+    color: white;
+    text-decoration: none;
+    border-radius: 6px;
+    transition: 0.3s;
+}
+
+.destination-info a:hover {
+    background: #f39c12;
+}
+
+/* Responsive Design */
+
+@media (max-width: 900px) {
+    .destination-container {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+@media (max-width: 600px) {
+    .destination-container {
+        grid-template-columns: 1fr;
+    }
+
+    .destination-section h2 {
+        font-size: 28px;
+    }
+}
+
+
+#culture-details {
+    padding: 30px 7%;
+    background: #fffaf3;
+}
+
+#place-title {
+    text-align: center;
+    color: #176b3a;
+    margin-bottom: 25px;
+}
+
+.info-card {
+    background: white;
+    padding: 20px;
+    margin-bottom: 18px;
+    border-radius: 10px;
+    box-shadow: 0 3px 10px #00000015;
+}
+
+.info-card h2 {
+    color: #b45309;
+}
+
+.info-card p {
+    line-height: 1.8;
+    color: #444;
+}
+
+#culture-details h2 {
+    color: #176b3a;
+}
+
+#culture-details h3 {
+    color: #b45309;
+}
+
+.destination-card button {
+    background: #176b3a;
+    color: white;
+    border: none;
+    padding: 12px 20px;
+    border-radius: 6px;
+    cursor: pointer;
+}
+
+.destination-card button:hover {
+    background: #104d2a;
+}
+.culture-section {
+    padding: 60px 7%;
+    background: #fffaf3;
+    text-align: center;
+}
+
+.culture-section h1 {
+    font-size: 50px;
+    color:rgb(255, 0, 0);
+    margin-bottom: 25px;
+}
+
+.culture-section .destination-card {
+    background: white;
+    padding: 25px;
+    margin: 20px auto;
+    border-radius: 12px;
+    text-align: left;
+    box-shadow: 0 3px 10px rgba(0,0,0,0.1);
+}
+
+.culture-section .destination-card h2 {
+    color: #b45f06;
+}
+
+.culture-section .destination-card p {
+    line-height: 1.7;
+}
+.gallery-section {
+    padding: 100px 7%;
+    background: #fffaf3;
+    text-align: center;
+}
+
+.gallery-section h1 {
+    color:red ;
+    font-size: 50px;
+    margin-bottom: 10px;
+    text-align: center;
+    font-weight:bold;
+}
+#gallery h1{
+color:red;
+font-size:50px;
+text-align:center;
+margin-bottom:15px ;
+}
+
+
+.gallery-section p {
+    margin-bottom: 30px;
+
+}
+
+.gallery-container {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 25px;
+}
+
+.gallery-item {
+    background: white;
+    border-radius: 12px;
+    overflow: hidden;
+    box-shadow:red;
+    transition: 0.3s;
+}
+
+.gallery-item:hover {
+    transform: translateY(-5px);
+}
+
+.gallery-item img {
+    width: 100%;
+    height: 220px;
+    object-fit: cover;
+}
+
+.gallery-item h2 {
+    padding: 15px;
+    color:red;
+    font-size: 32px;
+}
+
+@media (max-width: 768px) {
+    .gallery-container {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+@media (max-width: 480px) {
+    .gallery-container {
+        grid-template-columns: 1fr;
+    }
+}
+/* CONTACT SECTION */
+
+.contact-section {
+    padding: 70px 7%;
+    background: #f0f8ff;
+    text-align: center;
+}
+
+.contact-section h1 {
+    font-size: 45px;
+    color: #087f5b;
+    margin-bottom: 15px;
+}
+
+.contact-subtitle {
+    font-size: 18px;
+    color: #555;
+    margin-bottom: 40px;
+}
+
+.contact-container {
+    display: grid;
+    grid-template-columns: 1fr 1.5fr;
+    gap: 30px;
+    max-width: 1100px;
+    margin: auto;
+}
+
+.contact-info {
+    background: #087f5b;
+    color: white;
+    padding: 35px;
+    border-radius: 12px;
+    text-align: left;
+}
+
+.contact-info h2 {
+    margin-bottom: 25px;
+}
+
+.contact-info p {
+    font-size: 17px;
+    line-height: 1.8;
+    margin-bottom: 20px;
+}
+
+.contact-form {
+    background: white;
+    padding: 30px;
+    border-radius: 12px;
+    box-shadow: 0 4px 15px #00000015;
+}
+
+.contact-form input,
+.contact-form textarea {
+    width: 100%;
+    padding: 14px;
+    margin-bottom: 18px;
+    border: 1px solid #ccc;
+    border-radius: 6px;
+    font-size: 16px;
+    font-family: Arial, sans-serif;
+}
+
+.contact-form textarea {
+    resize: vertical;
+}
+
+.contact-form button {
+    width: 100%;
+    padding: 15px;
+    background: #087f5b;
+    color: white;
+    border: none;
+    border-radius: 6px;
+    font-size: 18px;
+    cursor: pointer;
+}
+
+.contact-form button:hover {
+    background: #f39c12;
+}
+
+/* Mobile Responsive */
+
+@media (max-width: 768px) {
+
+    .contact-container {
+        grid-template-columns: 1fr;
+    }
+
+    .contact-section h1 {
+        font-size: 32px;
+    }
+
+}

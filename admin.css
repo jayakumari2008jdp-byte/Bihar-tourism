@@ -1,0 +1,105 @@
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: Arial, sans-serif;
+    background: #f1f5f9;
+    min-height: 100vh;
+    padding: 30px 15px;
+}
+
+.container {
+    max-width: 900px;
+    margin: auto;
+    background: white;
+    padding: 30px;
+    border-radius: 12px;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+}
+
+h1 {
+    text-align: center;
+    color: #14532d;
+    margin-bottom: 10px;
+}
+
+h2, h3 {
+    text-align: center;
+    margin-bottom: 20px;
+    color: #333;
+}
+
+input {
+    width: 100%;
+    padding: 13px;
+    margin-bottom: 15px;
+    border: 1px solid #ccc;
+    border-radius: 6px;
+    font-size: 16px;
+}
+
+button {
+    padding: 11px 18px;
+    border: none;
+    border-radius: 6px;
+    background: #15803d;
+    color: white;
+    cursor: pointer;
+    font-size: 15px;
+    margin: 5px;
+}
+
+button:hover {
+    background: #166534;
+}
+
+#loginForm {
+    max-width: 400px;
+    margin: auto;
+}
+
+#loginForm button {
+    width: 100%;
+}
+
+#loginMessage {
+    text-align: center;
+    margin-top: 15px;
+    color: #dc2626;
+}
+
+#messages {
+    margin-top: 25px;
+}
+
+.message-card {
+    background: #f8fafc;
+    border: 1px solid #ddd;
+    border-left: 5px solid #15803d;
+    padding: 18px;
+    margin-bottom: 15px;
+    border-radius: 7px;
+    overflow-wrap: anywhere;
+}
+
+.message-card h4 {
+    color: #14532d;
+    margin-bottom: 10px;
+}
+
+.message-card p {
+    margin: 7px 0;
+    color: #333;
+}
+
+.delete-btn {
+    background: #dc2626;
+}
+
+.delete-btn:hover {
+    background: #991b1b;
+}
