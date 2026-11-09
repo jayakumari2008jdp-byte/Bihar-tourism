@@ -125,9 +125,7 @@ function showCulture(place) {
 const contactForm = document.getElementById("contactForm");
 
 if (contactForm) {
-
     contactForm.addEventListener("submit", async function(e) {
-
         e.preventDefault();
 
         const name = document.getElementById("contactName").value;
@@ -136,16 +134,13 @@ if (contactForm) {
         const message = document.getElementById("contactMessage").value;
 
         try {
-
             const response = await fetch(
-                "http:/api/contact",
+                "https://bihar-tourism-production.up.railway.app/api/contact",
                 {
                     method: "POST",
-
                     headers: {
                         "Content-Type": "application/json"
                     },
-
                     body: JSON.stringify({
                         name,
                         email,
@@ -156,7 +151,6 @@ if (contactForm) {
             );
 
             const result = await response.json();
-
             alert(result.message);
 
             if (result.success) {
@@ -164,12 +158,8 @@ if (contactForm) {
             }
 
         } catch (error) {
-
             alert("Backend connection failed!");
-
             console.error(error);
         }
-
     });
-
 }
