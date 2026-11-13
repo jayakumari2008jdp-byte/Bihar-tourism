@@ -471,4 +471,20 @@ margin-bottom:15px ;
         font-size: 32px;
     }
 
+
+/* VAISHALI PAGE IMAGE */
+
+.place-image {
+    width: 100%;
+    text-align: center;
+    padding: 20px;
+}
+
+.place-image img {
+    width: 100%;
+    max-width: 700px;
+    height: 350px;
+    object-fit: cover;
+    border-radius: 12px;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.2);
 }
